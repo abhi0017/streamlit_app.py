@@ -27,15 +27,12 @@
 #    https://cloud.google.com/iam/docs/manage-access-other-resources
 #
 # 5. Update the values in the "env" block below to match your Google Cloud setup.
-
 name: 'Build and Deploy Streamlit App to GKE'
-
 on:
   push:
     branches:
       - 'main'
   workflow_dispatch:
-
 env:
   PROJECT_ID: 'my-project'  # TODO: update to your Google Cloud project ID
   GAR_LOCATION: 'us-central1'  # TODO: update to your Artifact Registry location
@@ -46,7 +43,6 @@ env:
   IMAGE: 'streamlit-app'  # TODO: update to your desired image name
   WORKLOAD_IDENTITY_PROVIDER: 'projects/helical-glass-474405-a4/locations/global/workloadIdentityPools/myapppool/providers/MyAppOIDCProvider'  # TODO: update to your workload identity provider
   SERVICE_ACCOUNT: 'github-actions@helical-glass-474405-a4.iam.gserviceaccount.com'  # TODO: update to your service account email
-
 jobs:
   setup-build-publish-deploy:
     name: 'Setup, Build, Publish, and Deploy Streamlit App'
@@ -73,6 +69,7 @@ jobs:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ env.SERVICE_ACCOUNT }}'
           token_format: 'access_token'
+          audience: '//iam.googleapis.com/projects/helical-glass-474405-a4/locations/global/workloadIdentityPools/myapppool/providers/MyAppOIDCProvider'
       
       # Step 3: Authenticate Docker to Google Cloud Artifact Registry
       # This allows us to push Docker images to the registry
@@ -146,7 +143,6 @@ jobs:
           echo "Image: ${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
           kubectl get deployment ${DEPLOYMENT_NAME} -o wide
           kubectl describe deployment ${DEPLOYMENT_NAME}
-
 # Additional Notes:
 # - For managing IAM permissions and access control, refer to:
 #   https://cloud.google.com/iam/docs/manage-access-other-resources
