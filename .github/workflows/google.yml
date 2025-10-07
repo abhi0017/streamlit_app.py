@@ -44,8 +44,8 @@ env:
   DEPLOYMENT_NAME: 'streamlit-app'  # TODO: update to your deployment name
   REPOSITORY: 'streamlit-repo'  # TODO: update to your Artifact Registry repository name
   IMAGE: 'streamlit-app'  # TODO: update to your desired image name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'  # TODO: update to your workload identity provider
-  SERVICE_ACCOUNT: 'github-actions@my-project.iam.gserviceaccount.com'  # TODO: update to your service account email
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/helical-glass-474405-a4/locations/global/workloadIdentityPools/myapppool/providers/MyAppOIDCProvider'  # TODO: update to your workload identity provider
+  SERVICE_ACCOUNT: 'github-actions@helical-glass-474405-a4.iam.gserviceaccount.com'  # TODO: update to your service account email
 
 jobs:
   setup-build-publish-deploy:
